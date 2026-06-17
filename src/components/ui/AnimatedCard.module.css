@@ -1,0 +1,20 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  transition: transform 200ms ease, box-shadow 200ms ease,
+    opacity var(--reveal-duration, 600ms) ease,
+    transform var(--reveal-duration, 600ms) ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(30, 58, 95, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover {
+    transform: none;
+  }
+}

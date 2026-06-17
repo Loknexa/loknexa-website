@@ -1,0 +1,8 @@
+.DS_Store
+*.local
+scripts/screenshots
+node_modules/
+dist/
+.env
+.env.local
+.vscode/

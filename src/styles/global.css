@@ -1,0 +1,162 @@
+/* src/styles/global.css
+   Base styles + design tokens. Color/typography values are injected as CSS
+   custom properties at runtime from src/config.js (see App.jsx), but we
+   declare fallbacks here so the page never flashes unstyled content. */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+  /* Color fallbacks — overwritten on mount from config.colors */
+  --color-base: #faf9f6;
+  --color-primary: #1e3a5f;
+  --color-secondary: #14b8a6;
+  --color-accent: #f59e0b;
+  --color-text: #1a1a2e;
+  --color-muted: #6b7280;
+  --color-surface: #ffffff;
+  --color-border: #e5e7eb;
+  --color-gradientA: #fff8ee;
+  --color-gradientB: #f0fdfb;
+
+  /* Typography fallbacks — overwritten on mount from config.typography */
+  --font-heading: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --scale-base: 16px;
+
+  /* z-index scale — keep every layer here, never invent ad-hoc values */
+  --z-base: 10;
+  --z-dropdown: 20;
+  --z-navbar: 30;
+  --z-modal: 50;
+
+  /* Layout */
+  --container-max: 1200px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--scale-base);
+  line-height: 1.65;
+  color: var(--color-text);
+  background: var(--color-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  line-height: 1.2;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  max-width: 70ch; /* readable line length */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Visible, accessible focus ring on every interactive element */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 96px 0;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 64px 0;
+  }
+}
+
+/* Scroll-reveal base state, toggled by useScrollReveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--reveal-duration, 600ms) ease,
+    transform var(--reveal-duration, 600ms) ease;
+}
+
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null &&
+             request.auth.token.email == 'admin@loknexa.com';
+    }
+
+    function isValidContactMessage() {
+      let data = request.resource.data;
+      return data.keys().hasAll(['name', 'email', 'category', 'message'])
+        && data.name is string    && data.name.size() > 0
+        && data.email is string   && data.email.matches('.*@.*\\..*')
+        && data.message is string && data.message.size() > 10
+        && data.message.size() < 5001;
+    }
+
+    // contact_messages: public create (validated), admin read/update/delete
+    match /contact_messages/{docId} {
+      allow create: if isValidContactMessage();
+      allow read, update, delete: if isAdmin();
+    }
+
+    // projects: public read for visible docs, admin full access
+    match /projects/{docId} {
+      allow read: if resource.data.visible == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // services: public read for visible docs, admin full access
+    match /services/{docId} {
+      allow read: if resource.data.visible == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // site_settings: public read, admin write
+    match /site_settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // newsletter: public create (email validated), admin read/manage
+    match /newsletter/{docId} {
+      allow create: if request.resource.data.email is string
+                    && request.resource.data.email.matches('.*@.*\\..*');
+      allow read, update, delete: if isAdmin();
+    }
+
+    // admin_notifications: admin only
+    match /admin_notifications/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    // deny everything else
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

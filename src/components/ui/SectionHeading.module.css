@@ -1,0 +1,35 @@
+.wrap {
+  max-width: 640px;
+  margin: 0 auto 48px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.left {
+  margin: 0 0 48px;
+  text-align: left;
+}
+
+.left .subheading {
+  margin: 0;
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+}
+
+.heading {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.subheading {
+  margin: 0 auto;
+  color: var(--color-muted);
+  font-size: 1.05rem;
+}

@@ -1,0 +1,98 @@
+.footer {
+  background: var(--color-primary);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 64px 0 24px;
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.brandBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 320px;
+}
+
+.brandName {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.tagline {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+
+.link:hover {
+  color: var(--color-secondary);
+}
+
+.social {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.socialLink:hover {
+  background: var(--color-secondary);
+  transform: translateY(-2px);
+}
+
+.bottom {
+  padding-top: 24px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+@media (max-width: 640px) {
+  .top {
+    flex-direction: column;
+    gap: 28px;
+  }
+}
